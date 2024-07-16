@@ -1,0 +1,54 @@
+﻿@using Tazaker.Models
+@model List<ContactUs>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="mb-4" style="color: black;">ContactUs List</h1>
+
+@foreach (var contactUs in Model)
+{
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title text-black">@contactUs.Name</h5>
+            <dl class="row">
+                <dt class="col-sm-2" style="color: black;">Email:</dt>
+                <dd class="col-sm-10" style="color: black;">@contactUs.Email</dd>
+
+                <dt class="col-sm-2" style="color: black;">Subject:</dt>
+                <dd class="col-sm-10" style="color: black;">@contactUs.Subject</dd>
+
+                <dt class="col-sm-2" style="color: black;">Message:</dt>
+                <dd class="col-sm-10" style="color: black;">@contactUs.Message</dd>
+
+                <dt class="col-sm-2" style="color: black;">Status:</dt>
+                <dd class="col-sm-10" style="color: black;">@contactUs.Status</dd>
+            </dl>
+            <div class="text-end">
+                <button class="btn btn-danger" onclick="confirmDelete('@contactUs.Id')">Delete</button>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDelete(contactUsId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("Delete", "ContactUs")/' + contactUsId;
+                }
+            })
+        }
+    </script>
+}

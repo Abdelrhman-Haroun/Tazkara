@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model List<IdentityRole>
+@{
+    ViewData["Title"] = "Roles";
+}
+<h1 class="text-white">Roles</h1>
+<div class="mt-4">
+    <table class="table table-striped">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th>Id</th>
+                <th>Role Name</th>
+            </tr>
+        </thead>
+        <tbody class="text-white">
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td class="text-light">@role.Id</td>
+                    <td class="text-light">@role.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="Create" asp-controller="Role">Add New Role</a>
+</div>
